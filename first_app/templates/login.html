@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1 class="text-center fs-2 display-5 mt-1 mb-1">Login</h1>
+<div class="container w-50 mx-auto">
+    <form method="post" action="" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+        {% for err in form.non_field_errors %}
+        <p class="text-center bg-danger text-white p-1">{{err}}</p>
+        {% endfor %}
+        {% endif %}
+        <!-- {{form|crispy}} -->
+        {% for i in form %}
+        {{i.label_tag}}
+        {{i}}
+        <p class="text-danger">{{i.errors|striptags}}</p>
+        {% endfor %}
+        <button class="btn btn-outline-secondary text-uppercase">Login</button>
+    </form>
+</div>
+
+{% endblock %}

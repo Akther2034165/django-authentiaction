@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if messages %}
+{% for m in messages %}
+<div class="container toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body d-flex text-success">
+        <strong {% if m.tags %} class="{{m.tags}}" {% endif %}>{{m}}</strong>
+        <button type="button" class="ms-auto btn-close btn-sm" data-bs-dismiss="toast" aria-label="Close"
+            fdprocessedid="gtd88d"></button>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+<h1 class="text-center fs-2 display-5 mt-1 mb-1">Register</h1>
+<div class="container w-50 mx-auto">
+    <form method="post" action="" novalidate>
+        {% csrf_token %}
+        <!-- {{form|crispy}} -->
+        {% for i in form %}
+        {{i.label_tag}}
+        {{i}}
+        {{i.errors|striptags}}
+        <br>
+        {% endfor %}
+        <button class="btn btn-outline-secondary text-uppercase">submit</button>
+        <br>
+        <small>Already have an account? <a href="{% url 'login' %}" class="text-decoration-none mt-2">Please
+                Login</a></small>
+    </form>
+</div>
+{% endblock %}
